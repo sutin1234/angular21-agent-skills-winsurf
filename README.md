@@ -1,14 +1,7 @@
 # Angular21 Agent Skills & Code Review System
 
 <div align="center">
-  <!-- Fallback to text-based logo if image doesn't load -->
-  <div style="font-size: 120px; color: #DD0031; font-weight: bold; line-height: 1;">
-    <svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-      <polygon points="60,15 90,35 90,85 60,105 30,85 30,35" fill="#DD0031"/>
-      <polygon points="60,25 80,40 80,80 60,95 40,80 40,40" fill="#FFFFFF"/>
-      <text x="60" y="70" text-anchor="middle" fill="#DD0031" font-size="24" font-weight="bold" font-family="Arial, sans-serif">A</text>
-    </svg>
-  </div>
+  <img src="https://raw.githubusercontent.com/angular/angular/main/adev/src/assets/images/press-kit/angular_icon_gradient.gif" alt="Angular Modern Logo" width="120" height="120" style="filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));">
   <h3>🚀 Modern Angular Development with AI-Assisted Code Review</h3>
   <p>Comprehensive development tools and code review system for Angular 21+ applications</p>
   
