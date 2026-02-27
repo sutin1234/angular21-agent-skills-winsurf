@@ -1,7 +1,10 @@
 # Angular21 Agent Skills & Code Review System
 
 <div align="center">
-  <img src="https://angular.io/assets/images/logos/angular/angular.svg" alt="Angular Logo" width="120" height="120">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://angular.io/assets/images/logos/angular/angular_dark.svg">
+    <img src="https://angular.io/assets/images/logos/angular/angular.svg" alt="Angular Modern Logo" width="120" height="120" style="filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));">
+  </picture>
   <h3>🚀 Modern Angular Development with AI-Assisted Code Review</h3>
   <p>Comprehensive development tools and code review system for Angular 21+ applications</p>
   
@@ -364,6 +367,7 @@ Perfect for learning Angular 21+ best practices and implementing AI-assisted dev
 
 [![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)](https://angular.io/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![TanStack Query](https://img.shields.io/badge/TanStack_Query-FF4154?style=for-the-badge&logo=reactquery&logoColor=white)](https://tanstack.com/query/latest)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 
 ### 🌟 **Star this repository if it helps you!**
