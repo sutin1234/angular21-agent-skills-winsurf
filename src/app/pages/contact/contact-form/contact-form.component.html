@@ -1,0 +1,154 @@
+<div class="max-w-2xl mx-auto p-6 space-y-6">
+  <div class="text-center space-y-2">
+    <h1 class="text-3xl font-bold tracking-tight">Contact Us</h1>
+    <p class="text-muted-foreground">We'd love to hear from you! Send us a message using the form below.</p>
+  </div>
+  
+  <!-- Success Message -->
+  @if (submitSuccess()) {
+    <div class="bg-success/10 border border-success/20 text-success p-6 rounded-lg text-center space-y-4">
+      <h3 class="text-xl font-semibold">Thank you for your message!</h3>
+      <p>We'll get back to you as soon as possible.</p>
+      <button type="button" class="btn btn-secondary inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-10 px-4 py-2" (click)="resetForm()">
+        Send another message
+      </button>
+    </div>
+  } @else {
+    <!-- Contact Form -->
+    <form (ngSubmit)="onSubmit()" class="space-y-6">
+      <!-- Error Message -->
+      @if (submitError(); as error) {
+        <div class="bg-destructive/10 border border-destructive/20 text-destructive p-4 rounded-lg">
+          {{ error }}
+        </div>
+      }
+
+      <!-- Name Field -->
+      <div class="space-y-2">
+        <label for="name" class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+          Name *
+        </label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          [value]="name()"
+          (input)="onNameInput($any($event.target).value)"
+          (blur)="onNameBlur()"
+          class="input"
+          [class.border-destructive]="isNameInvalid()"
+          placeholder="Enter your full name"
+        />
+        @if (getNameError(); as nameError) {
+          <p class="text-sm text-destructive">{{ nameError }}</p>
+        }
+      </div>
+
+      <!-- Email Field -->
+      <div class="space-y-2">
+        <label for="email" class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+          Email *
+        </label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          [value]="email()"
+          (input)="onEmailInput($any($event.target).value)"
+          (blur)="onEmailBlur()"
+          class="input"
+          [class.border-destructive]="isEmailInvalid()"
+          placeholder="your.email@example.com"
+        />
+        @if (getEmailError(); as emailError) {
+          <p class="text-sm text-destructive">{{ emailError }}</p>
+        }
+      </div>
+
+      <!-- Subject Field -->
+      <div class="space-y-2">
+        <label for="subject" class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+          Subject *
+        </label>
+        <input
+          type="text"
+          id="subject"
+          name="subject"
+          [value]="subject()"
+          (input)="onSubjectInput($any($event.target).value)"
+          (blur)="onSubjectBlur()"
+          class="input"
+          [class.border-destructive]="isSubjectInvalid()"
+          placeholder="What is this about?"
+        />
+        @if (getSubjectError(); as subjectError) {
+          <p class="text-sm text-destructive">{{ subjectError }}</p>
+        }
+      </div>
+
+      <!-- Message Field -->
+      <div class="space-y-2">
+        <label for="message" class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+          Message *
+        </label>
+        <textarea
+          id="message"
+          name="message"
+          [value]="message()"
+          (input)="onMessageInput($any($event.target).value)"
+          (blur)="onMessageBlur()"
+          class="input min-h-32 resize-y"
+          [class.border-destructive]="isMessageInvalid()"
+          rows="6"
+          placeholder="Tell us more about your inquiry..."
+        ></textarea>
+        @if (getMessageError(); as messageError) {
+          <p class="text-sm text-destructive">{{ messageError }}</p>
+        }
+      </div>
+
+      <!-- Submit Button -->
+      <div class="flex gap-4 justify-end">
+        <button
+          type="submit"
+          class="btn btn-primary inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
+          [disabled]="!isFormValid() || loading()"
+        >
+          @if (loading()) {
+            <svg class="animate-spin h-4 w-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            Sending...
+          } @else {
+            Send Message
+          }
+        </button>
+        
+        <button
+          type="button"
+          class="btn btn-secondary inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-10 px-4 py-2"
+          (click)="resetForm()"
+          [disabled]="loading()"
+        >
+          Clear Form
+        </button>
+      </div>
+    </form>
+  }
+
+  <!-- Contact Information -->
+  <div class="space-y-4">
+    <h3 class="text-xl font-semibold text-center">Other Ways to Reach Us</h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      @for (item of contactInfoItems(); track item.title) {
+        <div class="card text-center hover:shadow-md transition-shadow">
+          <div class="card-content">
+            <h4 class="text-lg font-medium mb-2">{{ item.icon }} {{ item.title }}</h4>
+            <p class="text-muted-foreground whitespace-pre-line">{{ item.content }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>

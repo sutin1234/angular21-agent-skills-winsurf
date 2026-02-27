@@ -32,6 +32,8 @@
     "@angular/platform-server": "^21.1.0",
     "@angular/router": "^21.1.0",
     "@angular/ssr": "^21.1.4",
+    "@tailwindcss/vite": "^4.2.0",
+    "@tanstack/angular-query-experimental": "^5.90.25",
     "express": "^5.1.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
@@ -40,12 +42,14 @@
     "@angular/build": "^21.1.4",
     "@angular/cli": "^21.1.4",
     "@angular/compiler-cli": "^21.1.0",
-    "@tailwindcss/postcss": "^4.1.12",
+    "@tailwindcss/postcss": "^4.2.0",
     "@types/express": "^5.0.1",
-    "@types/node": "^20.17.19",
+    "@types/node": "^20.19.33",
+    "clsx": "^2.1.1",
     "jsdom": "^27.1.0",
     "postcss": "^8.5.3",
-    "tailwindcss": "^4.1.12",
+    "tailwind-merge": "^3.5.0",
+    "tailwindcss": "^4.2.0",
     "typescript": "~5.9.2",
     "vitest": "^4.0.8"
   }

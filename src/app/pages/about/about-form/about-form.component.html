@@ -1,0 +1,241 @@
+<div class="max-w-4xl mx-auto p-6 space-y-8">
+  <!-- About Header with Content Projection -->
+  <div class="text-center space-y-4">
+    <ng-content select="[about-header]">
+      <h1 class="text-4xl font-bold tracking-tight">About Us</h1>
+      <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+        We're a team of passionate professionals dedicated to delivering exceptional solutions 
+        that drive success for our clients and partners.
+      </p>
+    </ng-content>
+  </div>
+
+  <!-- About Information Cards -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    @for (item of aboutInfoItems(); track item.title) {
+      <div class="card text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+        <div class="card-content space-y-4">
+          <div class="text-4xl">{{ item.icon }}</div>
+          <h3 class="text-xl font-semibold">{{ item.title }}</h3>
+          <p class="text-muted-foreground">{{ item.content }}</p>
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- Contact Form Section -->
+  <div class="bg-card border rounded-lg p-8 space-y-6">
+    <div class="text-center space-y-2">
+      <ng-content select="[form-header]">
+        <h2 class="text-2xl font-bold">Get In Touch</h2>
+        <p class="text-muted-foreground">
+          Have questions or want to learn more? We'd love to hear from you!
+        </p>
+      </ng-content>
+    </div>
+    
+    <!-- Success Message -->
+    @if (submitSuccess()) {
+      <div class="bg-success/10 border border-success/20 text-success p-6 rounded-lg text-center space-y-4" role="alert" aria-live="polite">
+        <h3 class="text-xl font-semibold">Thank you for your inquiry!</h3>
+        <p>We'll get back to you as soon as possible.</p>
+        <button type="button" class="btn btn-secondary inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-10 px-4 py-2" (click)="resetForm()">
+          Send another message
+        </button>
+      </div>
+    } @else {
+      <!-- Contact Form -->
+      <form (ngSubmit)="onSubmit()" class="space-y-6" [attr.aria-busy]="loading()">
+        <!-- Error Message -->
+        @if (submitError(); as error) {
+          <div class="bg-destructive/10 border border-destructive/20 text-destructive p-4 rounded-lg" role="alert" aria-live="assertive">
+            {{ error }}
+          </div>
+        }
+
+        <!-- Form Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Name Field -->
+          <div class="space-y-2">
+            <label for="name" class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+              Name *
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              [value]="name()"
+              (input)="onNameInput($any($event.target).value)"
+              (blur)="onNameBlur()"
+              class="input"
+              [class.border-destructive]="isNameInvalid()"
+              [attr.disabled]="isFormDisabled()"
+              [attr.readonly]="isFormReadonly()"
+              [attr.aria-invalid]="isNameInvalid()"
+              [attr.aria-describedby]="getNameError() ? 'name-error' : null"
+              placeholder="Enter your full name"
+            />
+            @if (getNameError(); as nameError) {
+              <p id="name-error" class="text-sm text-destructive" role="alert">{{ nameError }}</p>
+            }
+          </div>
+
+          <!-- Email Field -->
+          <div class="space-y-2">
+            <label for="email" class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+              Email *
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              [value]="email()"
+              (input)="onEmailInput($any($event.target).value)"
+              (blur)="onEmailBlur()"
+              class="input"
+              [class.border-destructive]="isEmailInvalid()"
+              [attr.disabled]="isFormDisabled()"
+              [attr.readonly]="isFormReadonly()"
+              [attr.aria-invalid]="isEmailInvalid()"
+              [attr.aria-describedby]="getEmailError() ? 'email-error' : null"
+              placeholder="your.email@example.com"
+            />
+            @if (getEmailError(); as emailError) {
+              <p id="email-error" class="text-sm text-destructive" role="alert">{{ emailError }}</p>
+            }
+          </div>
+        </div>
+
+        <!-- Company Field (Conditional) -->
+        @if (showCompanyField()) {
+          <div class="space-y-2">
+            <label for="company" class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+              Company (Optional)
+            </label>
+            <input
+              type="text"
+              id="company"
+              name="company"
+              [value]="company()"
+              (input)="onCompanyInput($any($event.target).value)"
+              (blur)="onCompanyBlur()"
+              class="input"
+              [class.border-destructive]="isCompanyInvalid()"
+              [attr.disabled]="isFormDisabled()"
+              [attr.readonly]="isFormReadonly()"
+              [attr.aria-invalid]="isCompanyInvalid()"
+              [attr.aria-describedby]="getCompanyError() ? 'company-error' : null"
+              placeholder="Your company name"
+            />
+            @if (getCompanyError(); as companyError) {
+              <p id="company-error" class="text-sm text-destructive" role="alert">{{ companyError }}</p>
+            }
+          </div>
+        }
+
+        <!-- Interest Field -->
+        <div class="space-y-2">
+          <label for="interest" class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+            Area of Interest *
+          </label>
+          <select
+            id="interest"
+            name="interest"
+            [value]="interest()"
+            (change)="onInterestChange($any($event.target).value)"
+            class="input"
+            [class.border-destructive]="isInterestInvalid()"
+            [attr.disabled]="isFormDisabled()"
+            [attr.readonly]="isFormReadonly()"
+            [attr.aria-invalid]="isInterestInvalid()"
+            [attr.aria-describedby]="getInterestError() ? 'interest-error' : null"
+          >
+            <option value="">Select an option</option>
+            @for (option of interestOptions(); track option) {
+              <option [value]="option">{{ option }}</option>
+            }
+          </select>
+          @if (getInterestError(); as interestError) {
+            <p id="interest-error" class="text-sm text-destructive" role="alert">{{ interestError }}</p>
+          }
+        </div>
+
+        <!-- Message Field -->
+        <div class="space-y-2">
+          <label for="message" class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+            Message *
+          </label>
+          <div class="relative">
+            <textarea
+              id="message"
+              name="message"
+              [value]="message()"
+              (input)="onMessageInput($any($event.target).value)"
+              (blur)="onMessageBlur()"
+              class="input min-h-32 resize-y"
+              [class.border-destructive]="isMessageInvalid()"
+              [class.border-warning]="isMessageNearLimit() && !isMessageInvalid()"
+              [attr.disabled]="isFormDisabled()"
+              [attr.readonly]="isFormReadonly()"
+              [attr.aria-invalid]="isMessageInvalid()"
+              [attr.aria-describedby]="getMessageError() ? 'message-error' : 'message-help'"
+              rows="6"
+              placeholder="Tell us more about your inquiry..."
+            ></textarea>
+            <div class="absolute bottom-2 right-2 text-xs">
+              <span class="text-muted-foreground">
+                {{ messageCharCount() }}/{{ config.maxMessageLength }}
+              </span>
+              @if (isMessageNearLimit() && !isMessageInvalid()) {
+                <span class="text-warning ml-1" aria-label="Warning: approaching character limit">⚠️</span>
+              }
+            </div>
+          </div>
+          @if (getMessageError(); as messageError) {
+            <p id="message-error" class="text-sm text-destructive" role="alert">
+              {{ messageError }}
+            </p>
+          } @else {
+            <p id="message-help" class="text-sm text-muted-foreground">
+              Minimum 10 characters. Maximum {{ config.maxMessageLength }} characters.
+            </p>
+          }
+        </div>
+
+        <!-- Form Actions -->
+        <div class="flex gap-4 justify-end">
+          <ng-content select="[form-actions]">
+            <button
+              type="submit"
+              class="btn btn-primary inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
+              [disabled]="!isFormValid() || loading()"
+              [attr.aria-busy]="loading()"
+            >
+              @if (loading()) {
+                <svg class="animate-spin h-4 w-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span>Sending...</span>
+              } @else {
+                <span>Send Message</span>
+              }
+            </button>
+            
+            <button
+              type="button"
+              class="btn btn-secondary inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-10 px-4 py-2"
+              (click)="resetForm()"
+              [disabled]="loading()"
+            >
+              Clear Form
+            </button>
+          </ng-content>
+        </div>
+      </form>
+    }
+  </div>
+
+  <!-- Footer Content Projection -->
+  <ng-content select="[form-footer]"></ng-content>
+</div>

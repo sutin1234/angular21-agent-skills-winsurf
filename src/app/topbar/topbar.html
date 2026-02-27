@@ -1,0 +1,144 @@
+<nav class="topbar bg-background border-b">
+  <div class="topbar-container">
+    <div class="logo">
+      <a routerLink="/home" class="logo-link text-foreground hover:text-primary">Angular21</a>
+    </div>
+    
+    <ul class="nav-menu">
+      <li class="nav-item">
+        <a 
+          routerLink="/home" 
+          routerLinkActive="active"
+          class="nav-link text-foreground hover:text-primary"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          Home
+        </a>
+      </li>
+      <li class="nav-item">
+        <a 
+          routerLink="/about" 
+          routerLinkActive="active"
+          class="nav-link text-foreground hover:text-primary"
+        >
+          About
+        </a>
+      </li>
+      <li class="nav-item relative">
+        <button 
+          class="nav-link text-foreground hover:text-primary flex items-center gap-2 transition-colors duration-200"
+          (click)="toggleDropdown()"
+          aria-haspopup="true"
+          [attr.aria-expanded]="isDropdownOpen()"
+        >
+          Blog
+          <svg 
+            class="h-4 w-4 transition-transform duration-200" 
+            [class.rotate-180]="isDropdownOpen()"
+            xmlns="http://www.w3.org/2000/svg" 
+            fill="none" 
+            viewBox="0 0 24 24" 
+            stroke="currentColor"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        
+        <!-- Dropdown Menu with Tailwind CSS -->
+        <div 
+          class="absolute top-full left-0 mt-2 w-64 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-200"
+          [ngClass]="{
+            'opacity-0 invisible transform translate-y-2 scale-95': !isDropdownOpen(),
+            'opacity-100 visible transform translate-y-0 scale-100': isDropdownOpen()
+          }"
+        >
+          <ul class="py-2" role="menu">
+            <li class="px-3 py-1 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+              Blog Sections
+            </li>
+            <li class="border-t border-gray-100 dark:border-gray-700"></li>
+            <li>
+              <a 
+                routerLink="/blog" 
+                class="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
+                routerLinkActive="active"
+                role="menuitem"
+              >
+                <svg class="h-4 w-4 text-gray-500 dark:text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                </svg>
+                All Posts
+              </a>
+            </li>
+            <li>
+              <a 
+                routerLink="/blog-query-demo" 
+                class="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
+                routerLinkActive="active"
+                role="menuitem"
+              >
+                <svg class="h-4 w-4 text-gray-500 dark:text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+                TanStack Query Demo
+              </a>
+            </li>
+            <li class="border-t border-gray-100 dark:border-gray-700 mt-2"></li>
+            <li class="px-3 py-1 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+              Recent Posts
+            </li>
+            <li class="border-t border-gray-100 dark:border-gray-700"></li>
+            <li>
+              <a 
+                routerLink="/blog/getting-started-with-angular-signals" 
+                class="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
+                role="menuitem"
+              >
+                <svg class="h-4 w-4 text-gray-500 dark:text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                Getting Started with Angular Signals
+              </a>
+            </li>
+            <li>
+              <a 
+                routerLink="/blog/building-scalable-angular-applications" 
+                class="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
+                role="menuitem"
+              >
+                <svg class="h-4 w-4 text-gray-500 dark:text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                Building Scalable Angular Applications
+              </a>
+            </li>
+            <li>
+              <a 
+                routerLink="/blog/typescript-best-practices-angular-developers" 
+                class="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
+                role="menuitem"
+              >
+                <svg class="h-4 w-4 text-gray-500 dark:text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                TypeScript Best Practices for Angular Developers
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a 
+          routerLink="/contact" 
+          routerLinkActive="active"
+          class="nav-link text-foreground hover:text-primary"
+        >
+          Contact
+        </a>
+      </li>
+      <li class="nav-item">
+        <app-theme-toggle />
+      </li>
+    </ul>
+  </div>
+</nav>

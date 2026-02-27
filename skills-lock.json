@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "skills": {
+    "angular-best-practices-tanstack": {
+      "source": "alfredoperez/angular-best-practices",
+      "sourceType": "github",
+      "computedHash": "a882a40c4864c7188283c543ce4d2e699db6f91f347823f1f1d07fa11c4642cc"
+    },
+    "angular-best-practices-v20": {
+      "source": "develite98/angular-best-practices",
+      "sourceType": "github",
+      "computedHash": "90f006e1591cd12b3fdef03a579b0667b4b949e395e5f158dd24f883d06bfb2a"
+    },
+    "angular-component": {
+      "source": "analogjs/angular-skills",
+      "sourceType": "github",
+      "computedHash": "2789fdf11e2a70832ce2e6e79954018325a010ebdd45c5d4b1e7bfdf44679b7c"
+    },
+    "angular-frontend-clean-architecture": {
+      "source": "luismpenholato/maurao-skills",
+      "sourceType": "github",
+      "computedHash": "84bbead0bb5b7bb71625a23af6b659f8a1886be5d3c30084a9ab05477eefe326"
+    },
+    "find-skills": {
+      "source": "vercel-labs/skills",
+      "sourceType": "github",
+      "computedHash": "6412eb4eb3b91595ebab937f0c69501240e7ba761b3d82510b5cf506ec5c7adc"
+    },
+    "frontend-tailwind-best-practices": {
+      "source": "sergiodxa/agent-skills",
+      "sourceType": "github",
+      "computedHash": "a8287f2d78ec0fd7b7f98be9683d32aa37b863759c67eddd411f0dfbcbe06099"
+    },
+    "tailwind-v4-shadcn": {
+      "source": "secondsky/claude-skills",
+      "sourceType": "github",
+      "computedHash": "dedaff41ff3331cfe9734eee4203a1e85c6a013eec46df83d9c00e3d36e421f9"
+    }
+  }
+}
